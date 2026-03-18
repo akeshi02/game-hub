@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Snake Game",
+    "image": "images/snake.png",
+    "link": "games/snake.html"
+  },
+  {
+    "name": "Tetris",
+    "image": "images/tetris.png",
+    "link": "games/tetris.html"
+  },
+  {
+    "name": "Flappy Bird",
+    "image": "images/flappy.png",
+    "link": "games/flappy.html"
+  }
+]
