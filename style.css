@@ -1,14 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
-  margin: 0;
   font-family: 'Orbitron', sans-serif;
   background: radial-gradient(circle at center, #050510 0%, #000 100%);
   color: #0ff;
   overflow-x: hidden;
 }
 
-/* 🌌 MULTI-LAYER CYBERPUNK BACKGROUND */
+/* BACKGROUND GRID + GLOW */
 .bg-animation {
   position: fixed;
   width: 200%;
@@ -31,44 +36,24 @@ body {
 }
 
 @keyframes moveGrid {
-  from { transform: translate(0,0); }
+  from { transform: translate(0, 0); }
   to { transform: translate(-50px, -50px); }
 }
 
-/* ⚡ TITLE WITH GLITCH EFFECT */
+/* TITLE */
 .title {
   text-align: center;
-  font-size: 3.2rem;
-  margin: 20px;
-  position: relative;
+  font-size: 3rem;
+  margin: 25px 0;
   color: #0ff;
   text-shadow:
     0 0 10px cyan,
     0 0 30px cyan,
     0 0 60px #00ffff;
+  letter-spacing: 2px;
 }
 
-/* subtle flicker */
-.title::after {
-  content: "⚡ CYBER GAME HUB ⚡";
-  position: absolute;
-  left: 0;
-  top: 0;
-  color: magenta;
-  opacity: 0.2;
-  transform: translate(2px, 2px);
-  animation: glitch 2s infinite;
-}
-
-@keyframes glitch {
-  0% { transform: translate(2px,2px); }
-  25% { transform: translate(-2px,1px); }
-  50% { transform: translate(1px,-2px); }
-  75% { transform: translate(-1px,-1px); }
-  100% { transform: translate(2px,2px); }
-}
-
-/* 🔍 SEARCH */
+/* SEARCH BAR */
 #search {
   display: block;
   margin: 20px auto;
@@ -76,8 +61,10 @@ body {
   width: 60%;
   border-radius: 12px;
   border: none;
-  background: rgba(0,0,0,0.6);
+  outline: none;
+  background: rgba(0,0,0,0.7);
   color: #0ff;
+  font-size: 1rem;
   box-shadow: 0 0 10px cyan;
   transition: 0.3s;
 }
@@ -94,24 +81,23 @@ body {
   padding: 30px;
 }
 
-/* 🎮 CARD (3D + glow) */
+/* CARD */
 .card {
-  background: rgba(20,20,40,0.7);
+  background: rgba(20,20,40,0.75);
   border-radius: 20px;
   overflow: hidden;
   cursor: pointer;
-  transition: 0.4s;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
   position: relative;
   backdrop-filter: blur(12px);
-  transform-style: preserve-3d;
 }
 
-/* hover tilt */
+/* CARD HOVER */
 .card:hover {
-  transform: rotateX(5deg) rotateY(-5deg) scale(1.07);
+  transform: scale(1.06);
   box-shadow:
     0 0 20px cyan,
-    0 0 60px rgba(0,255,255,0.6);
+    0 0 50px rgba(0,255,255,0.6);
 }
 
 /* IMAGE */
@@ -119,30 +105,36 @@ body {
   width: 100%;
   height: 220px;
   object-fit: cover;
+  transition: 0.4s;
 }
 
-/* NAME */
+.card:hover img {
+  transform: scale(1.08);
+  filter: brightness(1.2);
+}
+
+/* GAME NAME */
 .game-name {
   text-align: center;
-  padding: 12px;
-  font-size: 1.4rem;
+  padding: 14px;
+  font-size: 1.3rem;
+  letter-spacing: 1px;
 }
 
-/* 🌈 ANIMATED BORDER */
+/* ANIMATED BORDER */
 .card::before {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: 20px;
   padding: 2px;
+
   background: linear-gradient(45deg, cyan, magenta, cyan);
   background-size: 300%;
   animation: borderMove 4s linear infinite;
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
+
   opacity: 0;
+  pointer-events: none;
 }
 
 .card:hover::before {
@@ -154,9 +146,46 @@ body {
   100% { background-position: 300%; }
 }
 
-/* 📱 RESPONSIVE */
+/* RIPPLE EFFECT */
+.ripple {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  background: cyan;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: rippleEffect 0.6s linear;
+  pointer-events: none;
+}
+
+@keyframes rippleEffect {
+  to {
+    transform: translate(-50%, -50%) scale(10);
+    opacity: 0;
+  }
+}
+
+/* SCROLLBAR (CYBER STYLE) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: cyan;
+  border-radius: 10px;
+}
+
+/* RESPONSIVE */
 @media (max-width: 700px) {
   .grid {
     grid-template-columns: 1fr;
+  }
+
+  #search {
+    width: 80%;
   }
 }
